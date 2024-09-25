@@ -45,7 +45,7 @@ class CatSerializer(serializers.ModelSerializer):
     color = Hex2NameColor()
     age = serializers.SerializerMethodField()
     image = Base64ImageField(required=False, allow_null=True)
-    
+
     class Meta:
         model = Cat
         fields = (
@@ -56,7 +56,7 @@ class CatSerializer(serializers.ModelSerializer):
 
     def get_age(self, obj):
         return dt.datetime.now().year - obj.birth_year
-    
+
     def create(self, validated_data):
         if 'achievements' not in self.initial_data:
             cat = Cat.objects.create(**validated_data)
